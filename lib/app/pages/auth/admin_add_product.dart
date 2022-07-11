@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:ecommerce/app/pages/providers.dart';
 import 'package:ecommerce/utils/snackbars.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,6 @@ class _AdminAddProductPageState extends ConsumerState<AdminAddProductPage> {
         imageUrl: imageUrl,
       ));
       // Open snack bar
-      // ignore: use_build_context_synchronously
       openIconSnackBar(context, "Product added successfully",
           const Icon(Icons.check, color: Colors.white));
       Navigator.pop(context);

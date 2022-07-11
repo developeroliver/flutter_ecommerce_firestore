@@ -1,4 +1,4 @@
-import 'package:ecommerce/app/pages/providers.dart';
+import 'package:ecommerce/providers/providers.dart';
 import 'package:ecommerce/app/pages/user/user_home.dart';
 import 'package:ecommerce/widgets/auth_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
