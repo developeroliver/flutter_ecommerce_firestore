@@ -13,13 +13,12 @@ final authStateChangesProvider = StreamProvider<User?>((ref) {
 
 final databaseProvider = Provider<FirestoreService?>((ref) {
   final auth = ref.watch(authStateChangesProvider);
- String? uid = auth.asData?.value?.uid;
+  String? uid = auth.asData?.value?.uid;
   if (uid != null) {
     return FirestoreService(uid: uid);
   }
   return null;
 });
-
 
 final storageProvider = Provider<StorageService?>((ref) {
   final auth = ref.watch(authStateChangesProvider);
@@ -30,6 +29,6 @@ final storageProvider = Provider<StorageService?>((ref) {
   return null;
 });
 
-final bagProvider = ChangeNotifierProvider<BagViewProvider>((ref) => BagViewProvider());
-
-
+final bagProvider = ChangeNotifierProvider<BagViewProvider>(
+  (ref) => BagViewProvider(),
+);
