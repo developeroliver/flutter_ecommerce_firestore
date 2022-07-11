@@ -1,12 +1,10 @@
 import 'dart:io';
-
-import 'package:ecommerce/app/pages/providers.dart';
 import 'package:ecommerce/utils/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../models/product.dart';
+import '../../../providers/providers.dart';
 import '../../../widgets/custom_input_field_Fb1.dart';
 
 class AdminAddProductPage extends ConsumerStatefulWidget {

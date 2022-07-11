@@ -1,7 +1,6 @@
 import 'package:ecommerce/widgets/user_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../models/product.dart';
 
 class ProductDetail extends ConsumerWidget {
