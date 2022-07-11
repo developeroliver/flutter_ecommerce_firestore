@@ -33,35 +33,36 @@ class AdminHome extends ConsumerWidget {
                     children: [
                       const Text("No products yet..."),
                       Lottie.asset("assets/anim/empty.json", // here
-                          width: 200,
+                          width: 300,
                           repeat: false),
                     ],
                   ),
                 );
               }
               return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    final product = snapshot.data![index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.5),
-                      child: ProductListTile(
-                          product: product,
-                          onDelete: () async {
-                            openIconSnackBar(
-                              context,
-                              "Deleting item...",
-                              const Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                            );
-                            await ref
-                                .read(databaseProvider)!
-                                .deleteProduct(product.id!);
-                          }),
-                    );
-                  });
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final product = snapshot.data![index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.5),
+                    child: ProductListTile(
+                        product: product,
+                        onDelete: () async {
+                          openIconSnackBar(
+                            context,
+                            "Deleting item...",
+                            const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          );
+                          await ref
+                              .read(databaseProvider)!
+                              .deleteProduct(product.id!);
+                        }),
+                  );
+                },
+              );
             }
             return const Center(child: CircularProgressIndicator());
           }),

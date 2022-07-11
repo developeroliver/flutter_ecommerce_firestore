@@ -33,7 +33,7 @@ class ProductListTile extends StatelessWidget {
         },
         child: Container(
           width: screenSize.width,
-          height: 75,
+          height: 90,
           padding: const EdgeInsets.all(15.0),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -62,7 +62,6 @@ class ProductListTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(product.name,
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
