@@ -1,6 +1,9 @@
 import 'package:ecommerce/providers/providers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/user_data.dart';
 
 class AuthWidget extends ConsumerWidget {
   const AuthWidget({
@@ -13,17 +16,15 @@ class AuthWidget extends ConsumerWidget {
   final WidgetBuilder signedInBuilder;
   final WidgetBuilder adminSignedInBuilder;
 
-  final adminEmail = "olive@dev.io";
+  final adminEmail = "olive@dev.io"; // store admin email here and somewhere else later
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authStateChanges = ref.watch(authStateChangesProvider);
-    const adminEmail = "olive@dev.io"; // store this somewhere else
+    // check if user exists and if not save it
     return authStateChanges.when(
       data: (user) => user != null
-          ? user.email == adminEmail
-              ? adminSignedInBuilder(context)
-              : signedInBuilder(context)
+          ? signedInHandler(context, ref, user)
           : nonSignedInBuilder(context),
       loading: () => const Scaffold(
         body: Center(
@@ -32,8 +33,34 @@ class AuthWidget extends ConsumerWidget {
       ),
       error: (_, __) => const Scaffold(
           body: Center(
-        child: Text("Something went wrong!"),
-      )),
+            child: Text("Something went wrong!"),
+          )),
     );
+  }
+
+  FutureBuilder<UserData?> signedInHandler(context, WidgetRef ref, User user) {
+    final database = ref.read(databaseProvider)!;
+    final potentialUserFuture = database.getUser(user.uid);
+    return FutureBuilder<UserData?>(
+        future: potentialUserFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            final potentialUser = snapshot.data;
+            if (potentialUser == null) {
+              database.addUser(UserData(
+                  email: user.email != null ? user.email! : "",
+                  uid: user.uid)); // no need to await as you don't depend on that
+            }
+            if (user.email == adminEmail) {
+              return adminSignedInBuilder(context);
+            }
+            return signedInBuilder(context);
+          }
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        });
   }
 }
