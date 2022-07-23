@@ -16,7 +16,7 @@ A mini e-Commerce App- Works on Android & iOS!
 ## Screenshot
 
 <p align="center">
-  <img width="300" src="https://github.com/developeroliver/flutter_ecommerce_firestore_riverpod/blob/master/screenshot.gif" alt="gif">
+  <img width="200" src="https://github.com/developeroliver/flutter_ecommerce_firestore_riverpod/blob/master/screenshot.gif" alt="gif">
 </p>
 
 
