@@ -13,6 +13,8 @@ class Product {
     required this.imageUrl,
   });
 
+  double get priceWithTax => price * 1.2;
+
   Product.fromMap(Map<String, dynamic> map)
       : name = map['name'] ?? "",
         id = map['id'] ?? "",
